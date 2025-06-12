@@ -10,7 +10,7 @@ import DessertsSection from './components/DessertSection'
 import BeverageSection from './components/BeveragesSection'
 import ScrollPopupCard from './components/ScrollPopupCard'
 import SearchBar from './components/SearchBar'
-import CartIcon from './components/CartIcon'
+
 
 
 export default function Home() {

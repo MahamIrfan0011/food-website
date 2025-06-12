@@ -44,7 +44,7 @@ export default function Contact() {
       {/* Left side: Contact info */}
       <div className="md:w-1/3 p-6 bg-gray-50 rounded-lg shadow-sm flex flex-col justify-center">
         <h2 className="text-3xl font-semibold mb-6 text-gray-800">Contact Us</h2>
-        <p className="mb-4 text-gray-600">We'd love to hear from you! Reach out with any questions or feedback.</p>
+        <p className="mb-4 text-gray-600">We&apos;d love to hear from you! Reach out with any questions or feedback.</p>
 
         <div className="space-y-4 text-gray-700 text-base">
           <div>

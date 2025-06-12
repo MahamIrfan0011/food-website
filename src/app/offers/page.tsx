@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import Image from 'next/image';
 
 type Offer = {
   title: string
@@ -129,9 +130,11 @@ export default function Offers() {
                 style={{ minHeight: '500px', color: 'black' }}
               >
                 {/* Large Image */}
-                <img
+                <Image
                   src={offer.media || '/assets/default.jpg'}
                   alt={offer.title}
+                  width={600}
+                  height={400}
                   className="w-full object-cover rounded-t-xl"
                 />
 
