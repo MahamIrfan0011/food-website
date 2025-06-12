@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import SearchBar from '../components/SearchBar'
 
 const menuItems = [
   {
@@ -249,8 +250,13 @@ const menuItems = [
 ]
 
 export default function MenuPage() {
-  const searchParams = useSearchParams()
-  const searchQuery = searchParams.get('search')?.toLowerCase() || ''
+ const searchParams = useSearchParams()
+const [searchQuery, setSearchQuery] = useState('')
+
+useEffect(() => {
+  const query = searchParams.get('search')?.toLowerCase() || ''
+  setSearchQuery(query)
+}, [searchParams])
   const [filteredItems, setFilteredItems] = useState(menuItems)
 
   useEffect(() => {
@@ -269,8 +275,9 @@ export default function MenuPage() {
   return (
     <>
     <Navbar />
-  
-    <div className="px-4 py-12 max-w-6xl mx-auto mt-18">
+     <div style={{ paddingTop: '64px' }}className='mt-3'>
+  <SearchBar />
+    <div className="px-4 py-12 max-w-6xl mx-auto mt-4">
       {/* Catchy Animated Heading */}
       <motion.h1
         className="text-4xl sm:text-5xl font-bold text-center mb-4 text-black"style={{ fontFamily: 'Poppins, sans-serif' }}
@@ -344,6 +351,7 @@ export default function MenuPage() {
       </div>
     </div>
     <Footer />
+    </div>
     </>
 
   )
