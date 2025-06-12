@@ -50,14 +50,20 @@ export default function MenuPage() {
   const searchParams = useSearchParams()
   const [searchQuery, setSearchQuery] = useState('')
   const [filteredItems, setFilteredItems] = useState(menuItems)
+  const [hasMounted, setHasMounted] = useState(false)
 
-  // ✅ Only read search params on client after mount
   useEffect(() => {
-    const q = searchParams.get('search')?.toLowerCase() || ''
-    setSearchQuery(q)
-  }, [searchParams])
+    setHasMounted(true)
+  }, [])
 
-  // Filter when searchQuery updates
+  useEffect(() => {
+    if (hasMounted) {
+      const q = searchParams.get('search')?.toLowerCase() || ''
+      setSearchQuery(q)
+    }
+  }, [searchParams, hasMounted])
+
+  // Filtering logic stays the same
   useEffect(() => {
     if (searchQuery) {
       setFilteredItems(
@@ -70,6 +76,8 @@ export default function MenuPage() {
       setFilteredItems(menuItems)
     }
   }, [searchQuery])
+
+  if (!hasMounted) return null // Skip rendering on server
 
   return (
     <>
