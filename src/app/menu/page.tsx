@@ -141,7 +141,7 @@ export default function MenuPage() {
                     <p className="text-gray-500 text-sm capitalize">
                       Category: {item.category}
                     </p>
-                    <p className="text-pink-600 font-bold text-lg mt-1">
+                    <p className="text-gray-600 font-bold text-lg mt-1">
                       {item.price}
                     </p>
                     <button
