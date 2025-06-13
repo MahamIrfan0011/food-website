@@ -8,7 +8,6 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SearchBar from '../components/SearchBar'
 
-// ✅ Standardize categories to singular (e.g., 'snack', not 'snacks')
 const menuItems = [
   { name: 'Cheese Burger', category: 'burger', price: '$5.99', image: '/cheeseburger.jpg', badge: 'Hot' },
   { name: 'Chicken Fajita Pizza', category: 'pizza', price: '$9.99', image: '/pizza1.jpg', badge: 'New' },
@@ -63,7 +62,6 @@ export default function MenuPage() {
     }
   }, [searchParams, hasMounted])
 
-  // Filtering logic stays the same
   useEffect(() => {
     if (searchQuery) {
       setFilteredItems(
@@ -77,12 +75,12 @@ export default function MenuPage() {
     }
   }, [searchQuery])
 
-  if (!hasMounted) return null // Skip rendering on server
+  if (!hasMounted) return null
 
   return (
     <>
       <Navbar />
-      <div style={{ paddingTop: '64px' }} className="mt-3">
+      <div className="pt-16 mt-3">
         <SearchBar />
         <div className="px-4 py-12 max-w-6xl mx-auto mt-4">
           <motion.h1
@@ -101,14 +99,12 @@ export default function MenuPage() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            Satisfy your hunger with mouthwatering burgers, cheesy pizzas,
-            crispy snacks & sweet treats!
+            Satisfy your hunger with mouthwatering burgers, cheesy pizzas, crispy snacks & sweet treats!
           </motion.p>
 
           {searchQuery && (
             <p className="mb-6 text-center text-gray-500">
-              Showing results for:{' '}
-              <strong className="text-black">{searchQuery}</strong>
+              Showing results for: <strong className="text-black">{searchQuery}</strong>
             </p>
           )}
 
@@ -128,6 +124,7 @@ export default function MenuPage() {
                       alt={item.name}
                       fill
                       style={{ objectFit: 'cover' }}
+                      sizes="(max-width: 768px) 100vw, 33vw"
                     />
                     {item.badge && (
                       <span className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-md shadow z-10">
@@ -138,12 +135,8 @@ export default function MenuPage() {
 
                   <div className="p-5">
                     <h2 className="text-xl font-semibold">{item.name}</h2>
-                    <p className="text-gray-500 text-sm capitalize">
-                      Category: {item.category}
-                    </p>
-                    <p className="text-gray-600 font-bold text-lg mt-1">
-                      {item.price}
-                    </p>
+                    <p className="text-gray-500 text-sm capitalize">Category: {item.category}</p>
+                    <p className="text-gray-600 font-bold text-lg mt-1">{item.price}</p>
                     <button
                       className="mt-3 bg-[#A94A4A] hover:bg-[#C5705D] text-white px-4 py-2 rounded-full transition font-medium shadow animate-bounce"
                       onClick={() => alert(`Added ${item.name} to cart!`)}
@@ -154,9 +147,7 @@ export default function MenuPage() {
                 </motion.div>
               ))
             ) : (
-              <p className="text-center col-span-full text-gray-500">
-                No menu items found.
-              </p>
+              <p className="text-center col-span-full text-gray-500">No menu items found.</p>
             )}
           </div>
         </div>
