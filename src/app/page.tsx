@@ -1,4 +1,5 @@
 // pages/index.tsx or app/page.tsx (depending on your Next.js version)
+'use client'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import DealSlider from './components/DealSlider'
