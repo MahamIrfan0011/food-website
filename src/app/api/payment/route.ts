@@ -5,7 +5,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-05-28.basil',
 });
 
-// ✅ Type for each cart item
 type CartItem = {
   name: string;
   price: number;
@@ -15,7 +14,6 @@ type CartItem = {
 
 export async function POST(request: Request) {
   try {
-    // ✅ Explicitly type cart
     const { cart }: { cart: CartItem[] } = await request.json();
 
     const YOUR_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'https://food-website-lac-six.vercel.app';
@@ -36,6 +34,7 @@ export async function POST(request: Request) {
       quantity: item.quantity,
     }));
 
+    // ✅ Here you are actually using `stripe`, so ESLint error will go away
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items,
@@ -46,7 +45,6 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ url: session.url });
   } catch (error) {
-    // ✅ Better error typing
     if (error instanceof Error) {
       console.error('Stripe checkout error:', error.message);
       return NextResponse.json({ error: error.message });
