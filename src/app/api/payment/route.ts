@@ -1,30 +1,35 @@
 import Stripe from 'stripe';
 import { NextResponse } from 'next/server';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, 
- 
-);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: "2025-05-28.basil"
+});
+
+type CartItem = {
+  name: string;
+  price: number;
+  quantity: number;
+  image: string;
+};
 
 export async function POST(request: Request) {
   try {
-    const { cart } = await request.json();
+    const { cart }: { cart: CartItem[] } = await request.json();
 
-    // Your domain - CHANGE this to your deployed domain!
-    const YOUR_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'https://food-website-lac-six.vercel.app/';
+    const YOUR_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'https://food-website-lac-six.vercel.app';
 
-    const line_items = cart.map((item: any) => ({
+    const line_items = cart.map((item: CartItem) => ({
       price_data: {
         currency: 'usd',
         product_data: {
           name: item.name,
-          // Stripe requires full https URLs for images
           images: [
             item.image.startsWith('http')
               ? item.image
               : `${YOUR_DOMAIN}${item.image}`
           ],
         },
-        unit_amount: Math.round(item.price * 100), // in cents
+        unit_amount: Math.round(item.price * 100),
       },
       quantity: item.quantity,
     }));
