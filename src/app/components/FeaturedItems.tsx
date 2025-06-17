@@ -50,14 +50,14 @@ export default function FeaturedItems() {
       <div className="flex justify-between mt-6">
         <button
           onClick={prev}
-          className="bg-yellow-400 text-black font-bold px-6 py-3 rounded-full shadow-lg hover:bg-yellow-300 transition-transform active:scale-95"
+          className="bg-black/50 text-white font-bold px-6 py-3 rounded-full shadow-lg transition-transform active:scale-95"
           aria-label="Previous featured item"
         >
           ‹
         </button>
         <button
           onClick={next}
-          className="bg-yellow-400 text-black font-bold px-6 py-3 rounded-full shadow-lg hover:bg-yellow-300 transition-transform active:scale-95"
+          className="bg-black/50 text-white font-bold px-6 py-3 rounded-full shadow-lg hover:bg-yellow-300 transition-transform active:scale-95"
           aria-label="Next featured item"
         >
           ›
@@ -70,9 +70,9 @@ export default function FeaturedItems() {
           <button
             key={idx}
             onClick={() => setCurrent(idx)}
-            className={`w-5 h-5 rounded-full transition-transform duration-300 ${
+            className={`w-3 h-3 rounded-full transition-transform duration-300 ${
               idx === current
-                ? 'bg-yellow-400 scale-125 shadow-lg'
+                ? 'bg-gray-900 scale-125 shadow-lg'
                 : 'bg-gray-300 hover:bg-yellow-400'
             }`}
             aria-label={`Go to featured item ${idx + 1}`}

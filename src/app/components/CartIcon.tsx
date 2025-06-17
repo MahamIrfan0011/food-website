@@ -1,13 +1,15 @@
-interface CartIconProps {
-  count: number
-}
+'use client';
 
-export default function CartIcon({ count }: CartIconProps) {
+import { useCart } from '../context/CartContext';
+
+export default function CartIcon() {
+  const { cartCount } = useCart(); // 👈 Directly get cartCount from context
+
   return (
     <div style={{ position: 'relative', cursor: 'pointer' }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6 "
+        className="h-6 w-6"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -19,7 +21,7 @@ export default function CartIcon({ count }: CartIconProps) {
         <circle cx="17" cy="21" r="1" />
       </svg>
 
-      {count > 0 && (
+      {cartCount > 0 && (
         <span
           style={{
             position: 'absolute',
@@ -38,10 +40,10 @@ export default function CartIcon({ count }: CartIconProps) {
             alignItems: 'center',
           }}
         >
-          {count}
+          {cartCount}
         </span>
       )}
     </div>
-  )
+  );
 }
 

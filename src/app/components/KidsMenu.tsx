@@ -2,27 +2,32 @@
 import Image from 'next/image'
 import { useRef } from 'react'
 import { useInView, motion } from 'framer-motion'
+import { useCart } from '../context/CartContext'
 
 const kidsItems = [
   {
+    id: 1,
     name: 'Mini Burger',
     image: '/mini.jpg',
     price: '$4.99',
     label: "NEW"
   },
   {
+    id: 2,
     name: 'Chicken Nuggets',
     image: '/nuggets.jpg',
     price: '$3.99',
     label: null
   },
   {
+    id: 3,
     name: 'Cheesy Fries',
     image: '/fries1.jpg',
     price: '$2.99',
     label: "10% OFF"
   },
    {
+    id: 4,
     name: 'Spring Rolls',
     image: '/springroll.jpg',
     price: '$2.99',
@@ -32,6 +37,7 @@ const kidsItems = [
 ]
 
 export default function KidsMenu() {
+  const { addToCart } = useCart()
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
@@ -81,9 +87,21 @@ export default function KidsMenu() {
 
             <div className="p-4 text-center">
               <p className="text-gray-600 mt-1 mb-3">{item.price}</p>
-              <button className="bg-[#A94A4A] hover:bg-[#C5705D] text-white px-4 py-2 rounded-full transition font-medium shadow-md">
-                Add to Cart
-              </button>
+              
+    <button
+      className="bg-[#A94A4A] hover:bg-[#C5705D] text-white px-4 py-2 rounded-full transition font-medium shadow-md"
+      onClick={() =>
+  addToCart({
+    id: item.id,
+    name: item.name,
+    price: parseFloat(item.price.replace('$', '')),
+    image: item.image,
+    quantity: 1  // <-- yahan number ki jagah 1 likhna hai
+  })
+      }
+    >
+      Add to Cart
+    </button>
             </div>
           </motion.div>
         ))}

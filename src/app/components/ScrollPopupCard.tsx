@@ -15,7 +15,7 @@ const highlightItems = [
   },
   {
     name: 'Hot Deals',
-    link: '/deals',
+    link: '/offers',
     image: '/dealpic.jpg',
     description: 'Grab these limited time hot deals before they vanish!',
     label: "20% OFF"

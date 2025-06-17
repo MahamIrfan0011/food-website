@@ -84,14 +84,14 @@ export default function NewArrivalsSlider() {
       {/* Navigation buttons */}
       <button
         onClick={prevSlide}
-        className="absolute top-1/2 left-5 transform -translate-y-1/2 bg-yellow-400 text-black px-5 py-2 rounded-full shadow-lg hover:bg-yellow-300 transition"
+        className="absolute top-1/2 left-5 transform -translate-y-1/2 bg-black/50 text-white px-5 py-2 rounded-full shadow-lg transition"
         aria-label="Previous"
       >
         &#8249;
       </button>
       <button
         onClick={nextSlide}
-        className="absolute top-1/2 right-5 transform -translate-y-1/2 bg-yellow-400 text-black px-5 py-2 rounded-full shadow-lg hover:bg-yellow-300 transition"
+        className="absolute top-1/2 right-5 transform -translate-y-1/2 bg-black/50 text-white px-5 py-2 rounded-full shadow-lg transition"
         aria-label="Next"
       >
         &#8250;
@@ -103,9 +103,9 @@ export default function NewArrivalsSlider() {
           <button
             key={item.id}
             onClick={() => setCurrent(index)}
-            className={`w-5 h-5 rounded-full transition-transform duration-300 ${
+            className={`w-3 h-3 rounded-full transition-transform duration-300 ${
               index === current
-                ? 'bg-yellow-400 scale-125 shadow-lg'
+                ? 'bg-gray-900 scale-125 shadow-lg'
                 : 'bg-gray-400 hover:bg-yellow-300'
             }`}
             aria-label={`Go to slide ${index + 1}`}

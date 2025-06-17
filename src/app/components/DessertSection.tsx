@@ -2,27 +2,32 @@
 import Image from 'next/image'
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { useCart } from '../context/CartContext'
 
 const dessertItems = [
   {
+    id: 1,
     name: 'Unicorn Sprinkle Donut',
     image: '/donut.jpg',
     price: '$2.49',
     label: null
   },
   {
+    id: 2,
     name: 'Ice Cream Sandwich',
     image: '/icesand.jpg',
     price: '$3.19',
     label: "NEW"
   },
   {
+    id: 3,
     name: 'Strawberry Cheesecake',
     image: '/cheese.jpg',
     price: '$2.89',
     label: "NEW"
   },
   {
+    id: 4,
     name: 'Macaroons',
     image: '/macarons.jpg',
     price: '$3.49',
@@ -31,6 +36,7 @@ const dessertItems = [
 ]
 
 export default function DessertsSection() {
+  const { addToCart } = useCart()
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
@@ -75,7 +81,18 @@ export default function DessertsSection() {
             </div>
             <div className="p-4 text-center bg-white border-t border-pink-100">
               <p className="text-gray-600 mt-1 mb-3">{item.price}</p>
-              <button className="bg-[#A94A4A] hover:bg-[#C5705D] text-white px-4 py-2 rounded-full transition font-medium shadow-md">
+              <button
+                className="bg-[#A94A4A] hover:bg-[#C5705D] text-white px-4 py-2 rounded-full transition font-medium shadow-md"
+                onClick={() =>
+                  addToCart({
+                    id: item.id,
+                    name: item.name,
+                    price: parseFloat(item.price.replace('$', '')),
+                    image: item.image,
+                    quantity: 1,
+                  })
+                }
+              >
                 Add to Cart
               </button>
             </div>
