@@ -2,9 +2,10 @@ import Stripe from 'stripe';
 import { NextResponse } from 'next/server';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-05-28.basil"
+  apiVersion: '2025-05-28.basil',
 });
 
+// ✅ Type for each cart item
 type CartItem = {
   name: string;
   price: number;
@@ -14,11 +15,12 @@ type CartItem = {
 
 export async function POST(request: Request) {
   try {
+    // ✅ Explicitly type cart
     const { cart }: { cart: CartItem[] } = await request.json();
 
     const YOUR_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'https://food-website-lac-six.vercel.app';
 
-    const line_items = cart.map((item: CartItem) => ({
+    const line_items = cart.map((item) => ({
       price_data: {
         currency: 'usd',
         product_data: {
@@ -26,7 +28,7 @@ export async function POST(request: Request) {
           images: [
             item.image.startsWith('http')
               ? item.image
-              : `${YOUR_DOMAIN}${item.image}`
+              : `${YOUR_DOMAIN}${item.image}`,
           ],
         },
         unit_amount: Math.round(item.price * 100),
@@ -43,8 +45,13 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({ url: session.url });
-  } catch (error: any) {
-    console.error('Stripe checkout error:', error.message);
-    return NextResponse.json({ error: error.message });
+  } catch (error) {
+    // ✅ Better error typing
+    if (error instanceof Error) {
+      console.error('Stripe checkout error:', error.message);
+      return NextResponse.json({ error: error.message });
+    }
+
+    return NextResponse.json({ error: 'Unknown error' });
   }
 }
