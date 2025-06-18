@@ -53,7 +53,7 @@ export async function POST(request: Request) {
       payment_method_types: ['card'],
       line_items,
       mode: 'payment',
-      success_url: `https://food-website-cln5.vercel.app//success`,
+      success_url: `https://food-website-cln5.vercel.app/success`,
       cancel_url: `https://food-website-lac-six.vercel.app/cancel`,
     });
 
