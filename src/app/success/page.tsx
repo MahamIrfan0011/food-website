@@ -1,18 +1,23 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useCart } from '../context/CartContext'; // adjust this path to your actual file
+import { useCart } from '../context/CartContext';
 import { motion } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
-import Link from 'next/link';
-
+import { useRouter } from 'next/navigation';
 
 export default function SuccessPage() {
   const { clearCart } = useCart();
+  const router = useRouter();
 
   useEffect(() => {
-    clearCart(); // 🧹 Clear cart on success page load
-  }, [clearCart]);
+    clearCart();
+    const timer = setTimeout(() => {
+      router.push('/'); // Auto navigate to home
+    }, 2000); // ⏱ wait 2 seconds
+
+    return () => clearTimeout(timer);
+  }, [clearCart, router]);
 
   return (
     <motion.div
@@ -24,15 +29,15 @@ export default function SuccessPage() {
       <CheckCircle className="text-green-500 w-20 h-20 animate-bounce" />
       <h1 className="text-4xl font-extrabold text-green-600 mt-6">🎉 Payment Successful!</h1>
       <p className="mt-4 text-lg text-gray-700 max-w-md text-center">
-        Thank you for your purchase. Your order has been confirmed and is being processed.
+        Thank you for your purchase. You’ll be redirected to home shortly.
       </p>
       <div className="mt-8">
-        <Link
-  href="/"
-  className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl shadow-lg transition-all duration-300"
->
-  Back to Home
-</Link>
+        <button
+          onClick={() => router.push('/')}
+          className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl shadow-lg transition-all duration-300"
+        >
+          Back to Home
+        </button>
       </div>
     </motion.div>
   );
