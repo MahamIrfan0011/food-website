@@ -87,7 +87,7 @@ export default function BeverageSection() {
                     name: item.name,
                     price: parseFloat(item.price.replace('$', '')),
                     image: item.image,
-                    quantity: 1,
+                    
                   })
                 }
               >
