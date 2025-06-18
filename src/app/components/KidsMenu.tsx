@@ -26,14 +26,13 @@ const kidsItems = [
     price: '$2.99',
     label: "10% OFF"
   },
-   {
+  {
     id: 4,
     name: 'Spring Rolls',
     image: '/springroll.jpg',
     price: '$2.99',
     label: "NEW"
-  },
-   
+  }
 ]
 
 export default function KidsMenu() {
@@ -49,10 +48,7 @@ export default function KidsMenu() {
       transition={{ duration: 0.8 }}
       className="py-12 px-6"
     >
-      <h2
-        className="text-3xl font-bold mb-6 text-center text-black tracking-wide drop-shadow-lg"
-        style={{ fontFamily: 'Poppins, sans-serif' }}
-      >
+      <h2 className="text-3xl font-bold mb-6 text-center text-black tracking-wide drop-shadow-lg">
         Kids Menu 
       </h2>
 
@@ -61,10 +57,7 @@ export default function KidsMenu() {
           <motion.div
             key={i}
             whileHover={{ scale: 1.05 }}
-            className="
-              w-64 bg-white rounded-3xl shadow-lg
-              overflow-hidden transition-all duration-300 group relative
-            "
+            className="w-64 bg-white rounded-3xl shadow-lg overflow-hidden transition-all duration-300 group relative"
           >
             <div className="relative w-full h-44 overflow-hidden rounded-t-3xl">
               <Image
@@ -73,13 +66,11 @@ export default function KidsMenu() {
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              {/* 🔖 Badge */}
-{item.label && (
-  <div className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-md shadow-md z-10">
-    {item.label}
-  </div>
-)}
-              {/* Name text at bottom-left */}
+              {item.label && (
+                <div className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-md shadow-md z-10">
+                  {item.label}
+                </div>
+              )}
               <p className="absolute bottom-2 left-2 text-white text-lg font-semibold drop-shadow-md">
                 {item.name}
               </p>
@@ -87,21 +78,20 @@ export default function KidsMenu() {
 
             <div className="p-4 text-center">
               <p className="text-gray-600 mt-1 mb-3">{item.price}</p>
-              
-    <button
-      className="bg-[#A94A4A] hover:bg-[#C5705D] text-white px-4 py-2 rounded-full transition font-medium shadow-md"
-      onClick={() =>
-  addToCart({
-    id: item.id,
-    name: item.name,
-    price: parseFloat(item.price.replace('$', '')),
-    image: item.image,
-    quantity: 1  // <-- yahan number ki jagah 1 likhna hai
-  })
-      }
-    >
-      Add to Cart
-    </button>
+              <button
+                className="bg-[#A94A4A] hover:bg-[#C5705D] text-white px-4 py-2 rounded-full transition font-medium shadow-md"
+                onClick={() =>
+                  addToCart({
+                    id: item.id,
+                    name: item.name,
+                    price: parseFloat(item.price.replace('$', '')),
+                    image: item.image,
+                    
+                  })
+                }
+              >
+                Add to Cart
+              </button>
             </div>
           </motion.div>
         ))}
