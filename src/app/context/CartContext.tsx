@@ -27,6 +27,7 @@ interface CartContextType {
   isCartOpen: boolean;
   toggleCart: () => void;
   lastAddedItem: Product | null;
+  clearCart: () => void; 
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -72,6 +73,11 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const removeFromCart = (productId: string) => {
     setCart(prevCart => prevCart.filter(item => item.id !== productId));
   };
+  const clearCart = () => {
+  setCart([]);
+  localStorage.removeItem('cart'); // if you're storing in localStorage
+};
+
 
   const updateQuantity = (productName: string, quantity: number) => {
     if (quantity < 1) return;
@@ -99,6 +105,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         isCartOpen,
         toggleCart,
         lastAddedItem,
+        clearCart,
       }}
     >
       {children}

@@ -57,7 +57,7 @@ export default function FeaturedItems() {
         </button>
         <button
           onClick={next}
-          className="bg-black/50 text-white font-bold px-6 py-3 rounded-full shadow-lg hover:bg-yellow-300 transition-transform active:scale-95"
+          className="bg-black/50 text-white font-bold px-6 py-3 rounded-full shadow-lg transition-transform active:scale-95"
           aria-label="Next featured item"
         >
           ›

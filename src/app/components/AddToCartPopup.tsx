@@ -27,6 +27,13 @@ export default function AddToCartPopup() {
     setVisible(true);
   }, [cart]);
 
+  // *** New effect to clear justAddedIds when cart is empty ***
+  useEffect(() => {
+    if (cart.length === 0) {
+      setJustAddedIds([]);
+    }
+  }, [cart]);
+
   useEffect(() => {
     if (!visible) return;
 
@@ -38,7 +45,8 @@ export default function AddToCartPopup() {
     return () => clearTimeout(timer);
   }, [visible]);
 
-  if (!visible || justAddedIds.length === 0) return null;
+  // Updated condition here:
+  if (!visible || justAddedIds.length === 0 || cart.length === 0) return null;
 
   const handleContinueShopping = () => setVisible(false);
 
@@ -108,4 +116,3 @@ export default function AddToCartPopup() {
     </div>
   );
 }
-

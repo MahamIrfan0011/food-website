@@ -54,7 +54,7 @@ export async function POST(request: Request) {
       line_items,
       mode: 'payment',
       success_url: `https://food-website-cln5.vercel.app/success`,
-      cancel_url: `https://food-website-lac-six.vercel.app/cancel`,
+      cancel_url: `https://food-website-cln5.vercel.app/cancel`,
     });
 
     return NextResponse.json({ url: session.url });
