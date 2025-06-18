@@ -53,9 +53,9 @@ export default function KidsMenu() {
       </h2>
 
       <div className="flex flex-wrap justify-center gap-10">
-        {kidsItems.map((item, i) => (
+        {kidsItems.map((item) => (
           <motion.div
-            key={i}
+            key={item.id}  // key me id use karna better hai, i nahi
             whileHover={{ scale: 1.05 }}
             className="w-64 bg-white rounded-3xl shadow-lg overflow-hidden transition-all duration-300 group relative"
           >
@@ -82,11 +82,11 @@ export default function KidsMenu() {
                 className="bg-[#A94A4A] hover:bg-[#C5705D] text-white px-4 py-2 rounded-full transition font-medium shadow-md"
                 onClick={() =>
                   addToCart({
-                    id: item.id,
+                    id: String(item.id),  // string type id, consistent with context
                     name: item.name,
                     price: parseFloat(item.price.replace('$', '')),
                     image: item.image,
-                    
+                    // quantity optional, default 1
                   })
                 }
               >

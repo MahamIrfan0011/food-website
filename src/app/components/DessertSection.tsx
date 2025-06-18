@@ -56,12 +56,12 @@ export default function DessertsSection() {
       </h2>
 
       <div className="flex flex-wrap justify-center gap-10">
-        {dessertItems.map((item, i) => (
-          <motion.div
-            key={i}
-            whileHover={{ scale: 1.05 }}
-            className="w-64 rounded-3xl shadow-lg overflow-hidden transition-all duration-300 group"
-          >
+        {dessertItems.map((item) => (
+  <motion.div
+    key={item.id}  // id se unique key dena best practice hai
+    whileHover={{ scale: 1.05 }}
+    className="w-64 rounded-3xl shadow-lg overflow-hidden transition-all duration-300 group"
+  >
             <div className="relative w-full h-44">
               <Image
                 src={item.image}
@@ -85,7 +85,7 @@ export default function DessertsSection() {
                 className="bg-[#A94A4A] hover:bg-[#C5705D] text-white px-4 py-2 rounded-full transition font-medium shadow-md"
                 onClick={() =>
                   addToCart({
-                    id: item.id,
+                    id:  String(item.id),
                     name: item.name,
                     price: parseFloat(item.price.replace('$', '')),
                     image: item.image,

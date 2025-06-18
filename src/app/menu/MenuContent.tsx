@@ -67,9 +67,10 @@ export default function MenuContent() {
   useEffect(() => {
     if (searchQuery) {
       setFilteredItems(
-        menuItems.filter(item =>
-          item.name.toLowerCase().includes(searchQuery) ||
-          item.category.toLowerCase().includes(searchQuery)
+        menuItems.filter(
+          (item) =>
+            item.name.toLowerCase().includes(searchQuery) ||
+            item.category.toLowerCase().includes(searchQuery)
         )
       )
     } else {
@@ -113,10 +114,10 @@ export default function MenuContent() {
           )}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredItems.length ? (
-              filteredItems.map(item => (
+            {filteredItems.length > 0 ? (
+              filteredItems.map((item) => (
                 <motion.div
-                  key={item.name}
+                  key={item.id}
                   className="border rounded-xl overflow-hidden bg-white shadow-md hover:shadow-lg transition-shadow duration-300"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -145,19 +146,18 @@ export default function MenuContent() {
                       {item.price}
                     </p>
                     <button
-    className="mt-3 bg-[#A94A4A] hover:bg-[#C5705D] text-white px-4 py-2 rounded-full transition font-medium shadow animate-bounce"
-    onClick={() => 
-      addToCart({
-        id: item.id, // ideally use a unique ID if available
-        name: item.name,
-        price: parseFloat(item.price.replace('$', '')),
-        image: item.image,
-        
-      })
-    }
-  >
-    Add to Cart
-  </button>
+                      className="mt-3 bg-[#A94A4A] hover:bg-[#C5705D] text-white px-4 py-2 rounded-full transition font-medium shadow animate-bounce"
+                      onClick={() =>
+                        addToCart({
+                          id: String(item.id),
+                          name: item.name,
+                          price: parseFloat(item.price.replace('$', '')),
+                          image: item.image,
+                        })
+                      }
+                    >
+                      Add to Cart
+                    </button>
                   </div>
                 </motion.div>
               ))
