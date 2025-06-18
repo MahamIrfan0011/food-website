@@ -1,9 +1,9 @@
 import Stripe from 'stripe';
 import { NextResponse } from 'next/server';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-05-28.basil',
-});
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!
+  
+);
 
 type CartItem = {
   name: string;
@@ -26,7 +26,7 @@ export async function POST(request: Request) {
           images: [
             item.image.startsWith('http')
               ? item.image
-              : `${YOUR_DOMAIN}${item.image}`,
+              : `${YOUR_DOMAIN}${item.image.startsWith('/') ? '' : '/'}${item.image}`,
           ],
         },
         unit_amount: Math.round(item.price * 100),
@@ -34,7 +34,6 @@ export async function POST(request: Request) {
       quantity: item.quantity,
     }));
 
-    // ✅ Here you are actually using `stripe`, so ESLint error will go away
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items,
@@ -47,9 +46,8 @@ export async function POST(request: Request) {
   } catch (error) {
     if (error instanceof Error) {
       console.error('Stripe checkout error:', error.message);
-      return NextResponse.json({ error: error.message });
+      return NextResponse.json({ error: error.message }, { status: 500 });
     }
-
-    return NextResponse.json({ error: 'Unknown error' });
+    return NextResponse.json({ error: 'Unknown error' }, { status: 500 });
   }
 }
