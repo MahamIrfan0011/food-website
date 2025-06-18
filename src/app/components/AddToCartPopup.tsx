@@ -25,7 +25,7 @@ export default function AddToCartPopup() {
 
     setJustAddedIds(prev => [...prev, lastItem.id]);
     setVisible(true);
-  }, [cart]);
+  }, [cart, justAddedIds]);
 
   // *** New effect to clear justAddedIds when cart is empty ***
   useEffect(() => {

@@ -4,13 +4,15 @@ import { useEffect } from 'react';
 import { useCart } from '../context/CartContext'; // adjust this path to your actual file
 import { motion } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
+import Link from 'next/link';
+
 
 export default function SuccessPage() {
   const { clearCart } = useCart();
 
   useEffect(() => {
     clearCart(); // 🧹 Clear cart on success page load
-  }, []);
+  }, [clearCart]);
 
   return (
     <motion.div
@@ -25,12 +27,12 @@ export default function SuccessPage() {
         Thank you for your purchase. Your order has been confirmed and is being processed.
       </p>
       <div className="mt-8">
-        <a
-          href="/"
-          className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl shadow-lg transition-all duration-300"
-        >
-          Back to Home
-        </a>
+        <Link
+  href="/"
+  className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl shadow-lg transition-all duration-300"
+>
+  Back to Home
+</Link>
       </div>
     </motion.div>
   );
