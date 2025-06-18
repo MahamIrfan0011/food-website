@@ -53,8 +53,8 @@ export async function POST(request: Request) {
       payment_method_types: ['card'],
       line_items,
       mode: 'payment',
-      success_url: `${YOUR_DOMAIN}/success`,
-      cancel_url: `${YOUR_DOMAIN}/cancel`,
+      success_url: `https://food-website-lac-six.vercel.app/success`,
+      cancel_url: `https://food-website-lac-six.vercel.app/cancel`,
     });
 
     return NextResponse.json({ url: session.url });
@@ -64,5 +64,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
     return NextResponse.json({ error: 'Unknown error occurred' }, { status: 500 });
+    
   }
 }
