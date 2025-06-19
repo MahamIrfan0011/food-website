@@ -4,15 +4,20 @@ import { useEffect } from 'react';
 import { useCart } from '../context/CartContext';
 import { motion } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function SuccessPageClient() {
   const { clearCart } = useCart();
-  const siteUrl = process.env.NEXT_PUBLIC_DOMAIN || 'https://food-website-lac-six.vercel.app';
+  const router = useRouter();
 
   useEffect(() => {
-    clearCart();
+    clearCart(); // Cart clear karo
   }, [clearCart]);
+
+  const handleGoHome = () => {
+    // Full page reload ke saath home pe jayega
+    window.location.href = '/';
+  };
 
   return (
     <div className="pt-20">
@@ -26,13 +31,13 @@ export default function SuccessPageClient() {
         <h1 className="text-3xl font-bold text-green-700 mt-4">🎉 Payment Successful!</h1>
         <p className="mt-2 text-gray-600 mb-6">Thank you for your order!</p>
         
-        {/* Dynamic Link - Works for both internal and external */}
-        <Link 
-          href={siteUrl} 
+        {/* Working Home Button */}
+        <button
+          onClick={handleGoHome}
           className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300 shadow-md hover:shadow-lg"
         >
           Back to Home
-        </Link>
+        </button>
       </motion.div>
     </div>
   );
