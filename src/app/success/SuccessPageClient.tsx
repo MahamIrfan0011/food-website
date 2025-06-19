@@ -8,9 +8,10 @@ import Link from 'next/link';
 
 export default function SuccessPageClient() {
   const { clearCart } = useCart();
+  const siteUrl = process.env.NEXT_PUBLIC_DOMAIN || 'https://food-website-lac-six.vercel.app';
 
   useEffect(() => {
-    clearCart(); // Payment success pe cart clear ho jayega
+    clearCart();
   }, [clearCart]);
 
   return (
@@ -25,9 +26,9 @@ export default function SuccessPageClient() {
         <h1 className="text-3xl font-bold text-green-700 mt-4">🎉 Payment Successful!</h1>
         <p className="mt-2 text-gray-600 mb-6">Thank you for your order!</p>
         
-        {/* Home page ka button */}
+        {/* Dynamic Link - Works for both internal and external */}
         <Link 
-          href="https://food-website-fxzr.vercel.app" 
+          href={siteUrl} 
           className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300 shadow-md hover:shadow-lg"
         >
           Back to Home
