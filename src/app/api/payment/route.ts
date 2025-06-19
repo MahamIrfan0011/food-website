@@ -29,7 +29,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Cart is empty or invalid' }, { status: 400 });
     }
 
-    const YOUR_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'https://food-website-lac-six.vercel.app';
+    const YOUR_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'https://food-website-fxzr.vercel.app';
 
     // Convert cart to Stripe line_items
     const line_items = cart.map((item) => ({
