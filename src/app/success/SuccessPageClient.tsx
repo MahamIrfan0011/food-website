@@ -11,24 +11,39 @@ export default function SuccessPageClient() {
   const router = useRouter();
 
   useEffect(() => {
-    clearCart();
-    const timer = setTimeout(() => {
-      router.push('/');
-    }, 3000);
+    // Run this effect safely
+    const handleRedirect = async () => {
+      try {
+        // Await clearCart if it's async, or remove await if it's not
+        await clearCart();
+        console.log('Cart cleared successfully');
 
-    return () => clearTimeout(timer);
+        const timer = setTimeout(() => {
+          console.log('Redirecting to home...');
+          router.replace('/'); // More reliable than push in some cases
+        }, 3000);
+
+        return () => clearTimeout(timer);
+      } catch (error) {
+        console.error('Error clearing cart or redirecting:', error);
+      }
+    };
+
+    handleRedirect();
   }, [clearCart, router]);
 
   return (
+  <div className="pt-20"> {/* Add padding top to make space for fixed navbar */}
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
-      className="min-h-screen flex flex-col items-center justify-center bg-green-50 p-6"
+      className="min-h-[80vh] flex flex-col items-center justify-center bg-green-50 p-6"
     >
       <CheckCircle className="text-green-600 w-16 h-16 animate-bounce" />
       <h1 className="text-3xl font-bold text-green-700 mt-4">🎉 Payment Successful!</h1>
       <p className="mt-2 text-gray-600">You’ll be redirected to home shortly...</p>
     </motion.div>
-  );
+  </div>
+);
 }

@@ -1,9 +1,6 @@
-import SuccessPageClient from './SuccessPageClient';
+// app/success/page.tsx
+import SuccessPageClient from '../success/SuccessPageClient';
 
-export const metadata = {
-  title: 'Success',
-};
-
-export default function SuccessPage() {
+export default function Page() {
   return <SuccessPageClient />;
 }
