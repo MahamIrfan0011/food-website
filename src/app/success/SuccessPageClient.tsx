@@ -1,23 +1,17 @@
 'use client';
 
+import SearchBar from '../components/SearchBar';
 import { useEffect } from 'react';
 import { useCart } from '../context/CartContext';
-import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
 
 export default function SuccessPageClient() {
   const { clearCart } = useCart();
-  const router = useRouter();
 
   useEffect(() => {
-    clearCart();
-    const timer = setTimeout(() => {
-      router.push('/');
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, [clearCart, router]);
+    clearCart(); // just clear the cart, no redirect
+  }, [clearCart]);
 
   return (
     <motion.div
@@ -28,7 +22,7 @@ export default function SuccessPageClient() {
     >
       <CheckCircle className="text-green-600 w-16 h-16 animate-bounce" />
       <h1 className="text-3xl font-bold text-green-700 mt-4">🎉 Payment Successful!</h1>
-      <p className="mt-2 text-gray-600">You’ll be redirected to home shortly...</p>
+      <p className="mt-2 text-gray-600">Thank you for your order.</p>
     </motion.div>
   );
 }
