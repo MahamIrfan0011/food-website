@@ -1,9 +1,7 @@
-// app/success/page.tsx
-
 import SuccessPageClient from './SuccessPageClient';
 
 export const metadata = {
-  title: 'Payment Success',
+  title: 'Success',
 };
 
 export default function SuccessPage() {
