@@ -30,11 +30,12 @@ export default function SuccessPage() {
         </p>
         <div className="mt-8">
           {/* ✅ Link instead of button */}
-          <Link href="/">
-            <span className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl shadow-lg transition-all duration-300 cursor-pointer">
-              Back to Home
-            </span>
-          </Link>
+          <Link
+  href="/"
+  className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl shadow-lg transition-all duration-300"
+>
+  Back to Home
+</Link>
         </div>
       </motion.div>
     </>
