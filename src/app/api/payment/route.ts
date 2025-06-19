@@ -21,9 +21,9 @@ type CartItem = {
 };
 
 // Handle POST request
-export async function POST(request: Request) {
+export async function POST(req: Request) {
   try {
-    const { cart }: { cart: CartItem[] } = await request.json();
+    const { cart }: { cart: CartItem[] } = await req.json();
 
     if (!cart || !Array.isArray(cart) || cart.length === 0) {
       return NextResponse.json({ error: 'Cart is empty or invalid' }, { status: 400 });
@@ -53,8 +53,8 @@ export async function POST(request: Request) {
       payment_method_types: ['card'],
       line_items,
       mode: 'payment',
-      success_url: `https://food-website-4sgp.vercel.app/success`,
-      cancel_url: `https://food-website-4sgp.vercel.app/cancel`,
+      success_url: `${req.headers.get('origin')}/success`,
+      cancel_url: `${req.headers.get('origin')}/cancel`,
     });
 
     return NextResponse.json({ url: session.url });
