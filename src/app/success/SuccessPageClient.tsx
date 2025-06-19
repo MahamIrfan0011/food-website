@@ -2,23 +2,16 @@
 
 import { useEffect } from 'react';
 import { useCart } from '../context/CartContext';
-import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
+import Link from 'next/link';
 
 export default function SuccessPageClient() {
   const { clearCart } = useCart();
-  const router = useRouter();
 
   useEffect(() => {
-    clearCart(); // Await hata diya agar function sync ho
-    
-    const timer = setTimeout(() => {
-      router.push('/');
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, [clearCart, router]);
+    clearCart(); // Payment success pe cart clear ho jayega
+  }, [clearCart]);
 
   return (
     <div className="pt-20">
@@ -26,11 +19,19 @@ export default function SuccessPageClient() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="min-h-[80vh] flex flex-col items-center justify-center bg-green-50 p-6"
+        className="min-h-[80vh] flex flex-col items-center justify-center bg-green-50 p-6 text-center"
       >
         <CheckCircle className="text-green-600 w-16 h-16 animate-bounce" />
         <h1 className="text-3xl font-bold text-green-700 mt-4">🎉 Payment Successful!</h1>
-        <p className="mt-2 text-gray-600">You’ll be redirected to home shortly...</p>
+        <p className="mt-2 text-gray-600 mb-6">Thank you for your order!</p>
+        
+        {/* Home page ka button */}
+        <Link 
+          href="https://food-website-fxzr.vercel.app" 
+          className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300 shadow-md hover:shadow-lg"
+        >
+          Back to Home
+        </Link>
       </motion.div>
     </div>
   );
