@@ -1,27 +1,33 @@
-'use client';
+'use client'
 
-import Navbar from '../components/Navbar';
-import SearchBar from '../components/SearchBar';
-import { useEffect } from 'react';
-import { useCart } from '../context/CartContext';
-import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
-import { CheckCircle } from 'lucide-react';
+import Navbar from '../components/Navbar'
+import SearchBar from '../components/SearchBar'
+import { useEffect } from 'react'
+import { useCart } from '../context/CartContext'
+import { useRouter } from 'next/navigation'
+import { motion } from 'framer-motion'
+import { CheckCircle } from 'lucide-react'
 
 export default function SuccessPage() {
-  const { clearCart } = useCart();
-  const router = useRouter();
+  const { clearCart } = useCart()
+  const router = useRouter()
 
   useEffect(() => {
-    clearCart(); // Clear cart when payment successful
+    // Delay clearing cart slightly to avoid hydration issues
+    const delayClear = setTimeout(() => {
+      clearCart()
+    }, 500)
 
     // Redirect after 3 seconds
     const timer = setTimeout(() => {
-      router.push('/');
-    }, 3000);
+      router.push('/')
+    }, 3000)
 
-    return () => clearTimeout(timer);
-  }, [clearCart, router]);
+    return () => {
+      clearTimeout(timer)
+      clearTimeout(delayClear)
+    }
+  }, [clearCart, router])
 
   return (
     <>
@@ -36,12 +42,13 @@ export default function SuccessPage() {
             className="min-h-screen flex flex-col items-center justify-center bg-green-50 p-6"
           >
             <CheckCircle className="text-green-600 w-16 h-16 animate-bounce" />
-            <h1 className="text-3xl font-bold text-green-700 mt-4">🎉 Payment Successful!</h1>
+            <h1 className="text-3xl font-bold text-green-700 mt-4">
+              🎉 Payment Successful!
+            </h1>
             <p className="mt-2 text-gray-600">
               Thank you for your order. You’ll be redirected to home shortly...
             </p>
 
-            {/* Back to Home Button */}
             <button
               onClick={() => router.push('/')}
               className="mt-6 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-300"
@@ -52,5 +59,5 @@ export default function SuccessPage() {
         </div>
       </div>
     </>
-  );
+  )
 }
