@@ -4,15 +4,24 @@ import Navbar from '../components/Navbar';
 import SearchBar from '../components/SearchBar';
 import { useEffect } from 'react';
 import { useCart } from '../context/CartContext';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
 
 export default function SuccessPage() {
   const { clearCart } = useCart();
+  const router = useRouter();
 
   useEffect(() => {
-    clearCart(); // clear cart only once on success
-  }, [clearCart]);
+    clearCart(); // Clear cart when payment successful
+
+    // Redirect after 3 seconds
+    const timer = setTimeout(() => {
+      router.push('/');
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [clearCart, router]);
 
   return (
     <>
@@ -28,7 +37,17 @@ export default function SuccessPage() {
           >
             <CheckCircle className="text-green-600 w-16 h-16 animate-bounce" />
             <h1 className="text-3xl font-bold text-green-700 mt-4">🎉 Payment Successful!</h1>
-            <p className="mt-2 text-gray-600">Thank you for your order.</p>
+            <p className="mt-2 text-gray-600">
+              Thank you for your order. You’ll be redirected to home shortly...
+            </p>
+
+            {/* Back to Home Button */}
+            <button
+              onClick={() => router.push('/')}
+              className="mt-6 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-300"
+            >
+              Back to Home
+            </button>
           </motion.div>
         </div>
       </div>
